@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}LedgerAsk{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b78fb'/%3E%3Cstop offset='1' stop-color='%232dd4bf'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3Crect x='5' y='14' width='3.5' height='6' rx='1' fill='white' fill-opacity='.85'/%3E%3Crect x='10.25' y='10' width='3.5' height='10' rx='1' fill='white' fill-opacity='.95'/%3E%3Crect x='15.5' y='5' width='3.5' height='15' rx='1' fill='white'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+                        display: ["Sora", "Inter", "ui-sans-serif", "sans-serif"],
+                    },
+                    colors: {
+                        ink: "#06080f",
+                        surface: "#0d111c",
+                        surface2: "#141a28",
+                        brand: {
+                            50: "#f1efff", 100: "#e3dfff", 200: "#c6bdff", 300: "#a697ff",
+                            400: "#8b78fb", 500: "#7260f0", 600: "#5d49dd", 700: "#4a39b3", 800: "#372a85",
+                        },
+                    },
+                    boxShadow: {
+                        glow: "0 0 0 1px rgba(124,108,246,0.15), 0 8px 30px -8px rgba(114,96,240,0.45)",
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="/static/css/app.css" />
+</head>
+<body class="h-full bg-ink text-slate-100 antialiased flex flex-col font-sans">
+    <nav class="border-b border-white/[0.06] bg-ink/85 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2.5 group">
+                {% include "partials/logo_mark.html" %}
+                <span class="font-display font-bold text-lg tracking-tight">
+                    <span class="text-white">Ledger</span><span class="brand-gradient-text">Ask</span>
+                </span>
+            </a>
+            <div class="flex items-center gap-1 text-sm">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                {% if user %}
+                    <a href="/chat" class="nav-link">Chat</a>
+                    <form action="/logout" method="post" class="inline ml-2">
+                        <button class="rounded-lg border border-white/10 bg-white/[0.04] px-3.5 py-1.5 font-medium text-slate-200 hover:bg-white/[0.08] hover:border-white/20 transition-all">Log out</button>
+                    </form>
+                {% else %}
+                    <a href="/login" class="nav-link">Log in</a>
+                    <a href="/signup" class="ml-2 rounded-lg bg-gradient-to-r from-brand-500 to-brand-400 px-4 py-1.5 font-semibold text-white shadow-glow hover:brightness-110 hover:-translate-y-px active:translate-y-0 transition-all">Sign up free</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="border-t border-white/[0.06] py-8 text-center text-xs text-slate-500">
+        <div class="flex items-center justify-center gap-2 mb-1.5 opacity-70">
+            {% include "partials/logo_mark.html" with context %}
+        </div>
+        LedgerAsk — a demo project by <span class="text-slate-400">Vento AI</span>. Sample data only, no real company information.
+    </footer>
+</body>
+</html>

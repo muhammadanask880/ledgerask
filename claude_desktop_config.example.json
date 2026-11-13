@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ledgerask": {
+      "command": "C:\\Users\\HP\\OneDrive\\Desktop\\LEDGERASK\\.venv\\Scripts\\python.exe",
+      "args": ["C:\\Users\\HP\\OneDrive\\Desktop\\LEDGERASK\\mcp_server\\server.py"]
+    }
+  }
+}

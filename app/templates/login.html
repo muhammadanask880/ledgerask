@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Log in — LedgerAsk{% endblock %}
+{% block content %}
+<section class="max-w-md mx-auto px-6 py-16 fade-up">
+    <div class="rounded-2xl border border-white/10 bg-surface card-glow p-8">
+        <div class="flex justify-center mb-5">{% include "partials/logo_mark.html" %}</div>
+        <h1 class="text-2xl font-display font-bold mb-1 text-center">Welcome back</h1>
+        <p class="text-slate-400 text-sm mb-7 text-center">Log in to keep chatting with your data.</p>
+
+        {% if error %}
+            <div class="mb-5 flex items-start gap-2 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                <svg class="mt-0.5 shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="post" action="/login" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1.5">Email</label>
+                <input name="email" type="email" required value="{{ email or '' }}"
+                       class="w-full rounded-lg bg-white/[0.04] border border-white/10 px-4 py-2.5 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/20 transition-all" />
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1.5">Password</label>
+                <input name="password" type="password" required
+                       class="w-full rounded-lg bg-white/[0.04] border border-white/10 px-4 py-2.5 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/20 transition-all" />
+            </div>
+            <label class="flex items-center gap-2 text-sm text-slate-300 select-none">
+                <input type="checkbox" name="remember_me" class="h-4 w-4 rounded border-white/20 bg-white/5 text-brand-500 focus:ring-brand-400/30" />
+                Remember me
+            </label>
+            <button type="submit" class="w-full rounded-lg bg-gradient-to-r from-brand-500 to-brand-400 py-2.5 font-semibold text-white shadow-glow hover:brightness-110 transition-all">
+                Log in
+            </button>
+        </form>
+
+        <p class="text-sm text-slate-400 mt-6 text-center">
+            No account yet? <a href="/signup" class="text-brand-300 hover:text-brand-200 font-medium hover:underline">Sign up free</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

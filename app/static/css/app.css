@@ -1,0 +1,231 @@
+body {
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background:
+        radial-gradient(900px 500px at 15% -10%, rgba(114, 96, 240, 0.16), transparent 60%),
+        radial-gradient(700px 500px at 100% 0%, rgba(45, 212, 191, 0.10), transparent 55%),
+        #06080f;
+    background-attachment: fixed;
+}
+
+.font-display {
+    font-family: "Sora", "Inter", ui-sans-serif, sans-serif;
+}
+
+.brand-gradient-text {
+    background-image: linear-gradient(90deg, #a697ff, #5eead4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.5rem;
+    color: rgb(203 213 225);
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+.nav-link:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* ---------- scrollbars ---------- */
+#messages {
+    scrollbar-width: thin;
+    scrollbar-color: #2a3346 transparent;
+}
+#messages::-webkit-scrollbar {
+    width: 6px;
+}
+#messages::-webkit-scrollbar-thumb {
+    background-color: #2a3346;
+    border-radius: 999px;
+}
+
+/* ---------- message entrance animation ---------- */
+@keyframes rise-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.msg-enter {
+    animation: rise-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ---------- typing / thinking indicator ---------- */
+.typing-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.typing-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #a697ff;
+    animation: typing-bounce 1.1s ease-in-out infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typing-bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* streaming text cursor */
+.stream-cursor::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 0.9em;
+    margin-left: 2px;
+    background: #a697ff;
+    vertical-align: text-bottom;
+    animation: blink 0.9s step-end infinite;
+}
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* ---------- proof / tool-call cards ---------- */
+.tool-card {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 0.75rem;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.tool-card:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.035);
+}
+.tool-card[open] summary .chev {
+    transform: rotate(90deg);
+}
+.tool-card summary {
+    list-style: none;
+}
+.tool-card summary::-webkit-details-marker {
+    display: none;
+}
+.chev {
+    transition: transform 0.15s ease;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+.status-pill.ok { color: #6ee7b7; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25); }
+.status-pill.error { color: #fca5a5; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.25); }
+
+.sql-block {
+    background: #080a11;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 0.6rem;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    overflow-x: auto;
+}
+.sql-kw { color: #c4b5fd; font-weight: 600; }
+.sql-fn { color: #7dd3fc; }
+.sql-str { color: #86efac; }
+.sql-num { color: #fcd34d; }
+
+/* ---------- result tables ---------- */
+.result-table {
+    width: 100%;
+    font-size: 0.8rem;
+    border-collapse: collapse;
+}
+.result-table thead th {
+    text-align: left;
+    font-weight: 600;
+    color: #94a3b8;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: sticky;
+    top: 0;
+    background: #0d111c;
+}
+.result-table tbody td {
+    padding: 0.4rem 0.6rem;
+    color: #e2e8f0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    white-space: nowrap;
+}
+.result-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.015);
+}
+.result-table tbody tr:hover {
+    background: rgba(124, 108, 246, 0.06);
+}
+.result-table td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- misc ---------- */
+.prose-invert :where(table) {
+    font-size: 0.85rem;
+}
+.prose-invert :where(th) {
+    color: #cbd5e1 !important;
+}
+
+.card-glow {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+    animation: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ---------- suggestion chips ---------- */
+.suggestion {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: #cbd5e1;
+    transition: all 0.15s ease;
+}
+.suggestion:hover {
+    border-color: rgba(166, 151, 255, 0.4);
+    background: rgba(114, 96, 240, 0.1);
+    color: white;
+    transform: translateY(-1px);
+}
+.suggestion:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ---------- avatars ---------- */
+.avatar-user {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #7260f0, #5eead4);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}

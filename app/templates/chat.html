@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}{{ conversation.title or "New chat" }} — LedgerAsk{% endblock %}
+{% block content %}
+<div class="w-full flex overflow-hidden" style="height: calc(100vh - 4rem); max-height: calc(100vh - 4rem);">
+
+    <aside class="w-64 h-full min-h-0 shrink-0 border-r border-white/[0.06] bg-white/[0.015] flex flex-col overflow-hidden">
+        <div class="p-3 shrink-0">
+            <form method="post" action="/chat/new">
+                <button type="submit" class="w-full flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/20 py-2.5 text-sm font-medium transition-all">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                    New chat
+                </button>
+            </form>
+        </div>
+        <div class="flex-1 min-h-0 overflow-y-auto px-2 pb-3 space-y-0.5">
+            <p class="px-2.5 pt-1 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-wider text-slate-600">Chats</p>
+            {% for c in conversations %}
+                <div class="group relative flex items-center rounded-lg {{ 'bg-brand-500/15 text-white' if c.id == conversation.id else 'text-slate-400 hover:bg-white/[0.05] hover:text-slate-200' }} transition-colors">
+                    <a href="/chat/{{ c.id }}" {% if c.id == conversation.id %}id="sidebar-active-link"{% endif %} class="flex-1 min-w-0 px-2.5 py-2 text-sm truncate">
+                        {{ c.title or "New chat" }}
+                    </a>
+                    <form method="post" action="/chat/{{ c.id }}/delete" onsubmit="return confirm('Delete this chat? This cannot be undone.');" class="shrink-0 pr-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button type="submit" title="Delete chat" class="p-1 rounded text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-colors">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 7h14M10 11v6M14 11v6M7 7l1-3h8l1 3M6 7l1 13a1 1 0 001 1h8a1 1 0 001-1l1-13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </form>
+                </div>
+            {% else %}
+                <p class="px-2.5 py-2 text-sm text-slate-600">No chats yet.</p>
+            {% endfor %}
+        </div>
+    </aside>
+
+    <section class="flex-1 min-w-0 min-h-0 h-full flex flex-col overflow-hidden">
+        <div class="max-w-3xl w-full mx-auto px-6 pt-6 flex flex-col flex-1 min-h-0 overflow-hidden">
+            <div class="mb-4 flex items-center gap-3 shrink-0">
+                {% include "partials/logo_mark.html" %}
+                <div class="min-w-0">
+                    <h1 id="chat-title" class="font-display text-lg font-bold leading-tight truncate">{{ conversation.title or "New chat" }}</h1>
+                    <p class="text-xs text-slate-500">Signed in as <span class="text-slate-300">{{ user.full_name }}</span> — every answer shows exactly how it was produced.</p>
+                </div>
+            </div>
+
+            <div id="messages" class="flex-1 min-h-0 space-y-4 overflow-y-auto pb-4"></div>
+
+            <div id="empty-state" class="hidden flex-1 min-h-0 flex flex-col items-center justify-center text-center text-slate-500 gap-4">
+                <div class="opacity-60">{% include "partials/logo_mark.html" %}</div>
+                <p>No messages yet. Try one of these:</p>
+                <div class="flex flex-wrap gap-2 justify-center max-w-lg">
+                    <button class="suggestion">What tables do we have?</button>
+                    <button class="suggestion">What were our top 5 products last quarter?</button>
+                    <button class="suggestion">Which region's revenue dropped last month, and by how much?</button>
+                    <button class="suggestion">Show monthly revenue for the last 12 months</button>
+                </div>
+            </div>
+
+            <form id="chat-form" class="mt-2 mb-6 flex gap-2 border-t border-white/[0.06] pt-4 shrink-0">
+                <input id="chat-input" type="text" autocomplete="off" maxlength="2000" placeholder="Ask a question about your business data..."
+                       class="flex-1 rounded-xl bg-white/[0.04] border border-white/10 px-4 py-3 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/20 transition-all disabled:opacity-50" />
+                <button id="chat-send" type="submit" class="rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 px-5 py-3 font-semibold text-white shadow-glow hover:brightness-110 transition-all disabled:opacity-50 disabled:pointer-events-none flex items-center gap-2">
+                    <span class="send-label">Ask</span>
+                </button>
+            </form>
+        </div>
+    </section>
+</div>
+
+<script>window.LEDGERASK_CONVERSATION_ID = {{ conversation.id }};</script>
+<script id="history-data" type="application/json">{{ history | tojson }}</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+<script src="/static/js/chat.js"></script>
+{% endblock %}

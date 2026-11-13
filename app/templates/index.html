@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}LedgerAsk — Ask your business database in plain English{% endblock %}
+{% block content %}
+
+<section class="max-w-6xl mx-auto px-6 pt-20 pb-14 text-center fade-up">
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-1.5 text-xs font-medium text-brand-200 tracking-wide">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        AI + SAFE, READ-ONLY DATABASE TOOLS
+    </span>
+    <h1 class="mt-6 font-display text-4xl sm:text-6xl font-bold leading-[1.1] tracking-tight">
+        Ask your company database<br class="hidden sm:block" />
+        <span class="brand-gradient-text">a plain English question.</span>
+    </h1>
+    <p class="mt-5 max-w-2xl mx-auto text-slate-400 text-lg leading-relaxed">
+        "What were our top 5 products last quarter?" — LedgerAsk turns that into real SQL,
+        runs it safely against your data, and shows you exactly how it got the answer.
+        No write access. No guessing. Every query logged.
+    </p>
+    <div class="mt-9 flex items-center justify-center gap-4">
+        <a href="/signup" class="rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 px-7 py-3.5 font-semibold text-white shadow-glow hover:brightness-110 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+            Try the live demo — it's free
+        </a>
+        <a href="#how-it-works" class="rounded-xl border border-white/10 bg-white/[0.03] px-7 py-3.5 font-semibold text-slate-200 hover:bg-white/[0.06] hover:border-white/20 transition-all">
+            See how it works
+        </a>
+    </div>
+</section>
+
+<section class="max-w-4xl mx-auto px-6 pb-20">
+    <div class="rounded-2xl border border-white/10 bg-surface card-glow overflow-hidden">
+        <div class="flex items-center gap-1.5 border-b border-white/[0.06] bg-white/[0.02] px-4 py-3">
+            <span class="h-2.5 w-2.5 rounded-full bg-red-400/70"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-amber-400/70"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/70"></span>
+            <span class="ml-3 text-xs text-slate-500">LedgerAsk — chat</span>
+        </div>
+        <div class="p-5 sm:p-7 space-y-4 text-sm">
+            <div class="flex justify-end">
+                <div class="max-w-[80%] rounded-2xl rounded-tr-sm bg-gradient-to-br from-brand-500 to-brand-600 px-4 py-2.5 text-white shadow-glow">
+                    Which region's revenue dropped last month, and by how much?
+                </div>
+            </div>
+            <div class="flex justify-start">
+                <div class="max-w-[85%] rounded-2xl rounded-tl-sm border border-white/10 bg-white/[0.03] px-4 py-3 text-slate-200">
+                    <p class="mb-2"><span class="text-slate-400">Time window:</span> Oct 2026 vs Sep 2026 (last two complete months).</p>
+                    <p class="mb-3"><strong class="text-white">Europe</strong> dropped the most — revenue fell from $246,571 to $46,734, a <span class="text-red-300 font-medium">−81%</span> change.</p>
+                    <details class="tool-card px-3 py-2" open>
+                        <summary class="cursor-pointer flex items-center gap-2 text-xs text-slate-400">
+                            <svg class="chev" width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                            <span class="status-pill ok">
+                                <svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                sales_by_region
+                            </span>
+                            <span class="text-slate-600">· read-only SQL ran against 5 tables</span>
+                        </summary>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="how-it-works" class="max-w-6xl mx-auto px-6 py-10">
+    <h2 class="font-display text-2xl sm:text-3xl font-bold text-center mb-2">How it stays safe</h2>
+    <p class="text-slate-400 text-center max-w-xl mx-auto mb-10">
+        This is the part most "AI + database" demos skip. LedgerAsk never gets write access, ever.
+    </p>
+    <div class="grid sm:grid-cols-3 gap-5">
+        <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-brand-400/30 hover:bg-white/[0.035] transition-all">
+            <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500/10 text-brand-300">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V8a4 4 0 118 0v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3 class="font-semibold mb-1.5 text-white">Read-only, always</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Every query is checked to be a single SELECT statement before it runs, and the database connection itself is opened read-only as a second layer of defense.</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-brand-400/30 hover:bg-white/[0.035] transition-all">
+            <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal-400/10 text-teal-300">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 3h10a1 1 0 011 1v16l-3-2-3 2-3-2-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8h6M9 12h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3 class="font-semibold mb-1.5 text-white">Fully auditable</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Every question and the exact SQL it produced is logged. You can always see where a number came from — the chat shows it right next to the answer.</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-brand-400/30 hover:bg-white/[0.035] transition-all">
+            <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-amber-400/10 text-amber-300">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3 class="font-semibold mb-1.5 text-white">Row limits & timeouts</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">No query can hang the system or dump your whole database into a chat message — hard limits are enforced on every single call.</p>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 py-16">
+    <div class="rounded-2xl border border-white/10 bg-gradient-to-br from-brand-500/[0.08] to-teal-400/[0.04] p-8 sm:p-10 text-center">
+        <p class="text-xs font-semibold uppercase tracking-wider text-brand-300 mb-4">Try asking</p>
+        <div class="grid sm:grid-cols-2 gap-3 text-sm max-w-3xl mx-auto">
+            <div class="rounded-xl bg-ink/60 border border-white/10 px-4 py-3 text-slate-300 text-left">"What were our top 5 products last quarter?"</div>
+            <div class="rounded-xl bg-ink/60 border border-white/10 px-4 py-3 text-slate-300 text-left">"Which region's revenue dropped last month, and by how much?"</div>
+            <div class="rounded-xl bg-ink/60 border border-white/10 px-4 py-3 text-slate-300 text-left">"Show me monthly revenue for the last 12 months"</div>
+            <div class="rounded-xl bg-ink/60 border border-white/10 px-4 py-3 text-slate-300 text-left">"What tables do we have, and what's in the orders table?"</div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
